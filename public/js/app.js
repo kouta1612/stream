@@ -1853,17 +1853,17 @@ __webpack_require__.r(__webpack_exports__);
       statuses: []
     };
   },
+  filters: {
+    age: function age(data) {
+      return moment__WEBPACK_IMPORTED_MODULE_0___default()(data).fromNow();
+    }
+  },
   created: function created() {
     var _this = this;
 
     _models_Status_js__WEBPACK_IMPORTED_MODULE_1__["default"].all(function (statuses) {
       return _this.statuses = statuses;
     });
-  },
-  methods: {
-    postedOn: function postedOn(status) {
-      return moment__WEBPACK_IMPORTED_MODULE_0___default()(status.created_at, "Asia/Tokyo").fromNow();
-    }
   }
 });
 
@@ -20085,7 +20085,7 @@ var render = function() {
             _c("div", { staticClass: "message-header" }, [
               _c("p", [_vm._v(_vm._s(status.user.name) + " said...")]),
               _vm._v(" "),
-              _c("p", [_vm._v(_vm._s(_vm.postedOn(status)))])
+              _c("p", [_vm._v(_vm._s(_vm._f("age")(status.created_at)))])
             ]),
             _vm._v(" "),
             _c(

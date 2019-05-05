@@ -5,10 +5,10 @@
         <div class="message" v-for="status in statuses" :key="status.id">
           <div class="message-header">
             <p>{{ status.user.name }} said...</p>
-            <p>{{postedOn(status)}}</p>
+            <p>{{ status.created_at | age }}</p>
           </div>
 
-          <div class="message-body" v-text="status.body">{{status.body}}</div>
+          <div class="message-body" v-text="status.body">{{ status.body }}</div>
         </div>
       </div>
     </div>
@@ -25,13 +25,13 @@ export default {
       statuses: []
     };
   },
+  filters: {
+    age(data) {
+      return moment(data).fromNow();
+    }
+  },
   created() {
     Status.all(statuses => (this.statuses = statuses));
-  },
-  methods: {
-    postedOn(status) {
-      return moment(status.created_at, "Asia/Tokyo").fromNow();
-    }
   }
 };
 </script>
